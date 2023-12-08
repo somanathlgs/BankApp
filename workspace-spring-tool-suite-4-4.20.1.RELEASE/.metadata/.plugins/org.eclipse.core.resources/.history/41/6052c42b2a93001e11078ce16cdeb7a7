@@ -1,0 +1,12 @@
+package service;
+
+import java.util.Optional;
+
+import entity.Account;
+
+public interface AccountService {
+ 
+	public Account createaccount();
+	public Optional<Account> getAccount();
+	public Account deposit();
+}

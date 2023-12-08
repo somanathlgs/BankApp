@@ -1,0 +1,50 @@
+package com.example.bankapp.Controller;
+
+
+	import org.springframework.beans.factory.annotation.Autowired;
+	import org.springframework.http.ResponseEntity;
+	import org.springframework.web.bind.annotation.*;
+
+	import java.util.List;
+
+	@RestController
+	@RequestMapping("/api/customers")
+	public class CustomerController {
+
+	    @Autowired
+	    private CustomerService customerService;
+
+	    @PostMapping("/create")
+	    public ResponseEntity<Customer> createCustomer(@RequestBody CustomerCreationRequest request) {
+	        // Assuming CustomerCreationRequest is a DTO containing necessary information for customer creation
+	        Customer newCustomer = customerService.createCustomer(request);
+	        return ResponseEntity.ok(newCustomer);
+	    }
+
+	    @GetMapping("/{customerId}")
+	    public ResponseEntity<Customer> getCustomerDetails(@PathVariable Long customerId) {
+	        Customer customer = customerService.getCustomerById(customerId);
+	        return ResponseEntity.ok(customer);
+	    }
+
+	    @GetMapping("/all")
+	    public ResponseEntity<List<Customer>> getAllCustomers() {
+	        List<Customer> customers = customerService.getAllCustomers();
+	        return ResponseEntity.ok(customers);
+	    }
+
+	    @PutMapping("/update/{customerId}")
+	    public ResponseEntity<String> updateCustomer(@PathVariable Long customerId, @RequestBody CustomerUpdateRequest request) {
+	        // Assuming CustomerUpdateRequest is a DTO containing necessary information for customer update
+	        customerService.updateCustomer(customerId, request);
+	        return ResponseEntity.ok("Customer updated successfully");
+	    }
+
+	    @DeleteMapping("/delete/{customerId}")
+	    public ResponseEntity<String> deleteCustomer(@PathVariable Long customerId) {
+	        customerService.deleteCustomer(customerId);
+	        return ResponseEntity.ok("Customer deleted successfully");
+	    }
+	
+
+}

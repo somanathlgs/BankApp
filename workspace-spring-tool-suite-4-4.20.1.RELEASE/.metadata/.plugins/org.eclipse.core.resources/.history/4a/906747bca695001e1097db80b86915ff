@@ -1,0 +1,130 @@
+package com.example.demo.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entity.Account;
+import com.example.demo.repository.AccountRepository;
+
+@Service
+public class AccountServiceimpl implements AccountService{
+
+	@Autowired
+	private AccountRepository accountRepository;
+	
+	@Autowired
+    private AccountNumberGeneratorService accountNumberGeneratorService;
+
+	
+	
+	@Override
+	public Account createaccount(Account account) {
+		
+		String randomAccountNumber = accountNumberGeneratorService.generateRandomAccountNumber();
+
+        Account newAccount = new Account();
+        newAccount.setAcc_number(randomAccountNumber);
+
+        // You might want to set other default values for the new account
+        newAccount.setBalance(5000);
+        newAccount.setAcc_status("Active");
+       
+
+        return accountRepository.save(newAccount);
+		
+		//		Account save = accountRepository.save(account);
+		//return save;
+	}
+
+	@Override
+	public List<Account> getallaccount() {
+		List<Account> list = accountRepository.findAll();
+		return list;
+	}
+	
+	@Override
+	public Account getaccount(String acc_id) {
+	      Account a = accountRepository.findById((long) Long.parseLong(acc_id)).orElse(null);
+		return a;
+		
+	}
+	
+	@Override
+	public Account updateaccount(int acc_id) {
+		
+		Account save = accountRepository.save(null);
+		return save;
+		
+	}
+
+	
+
+	
+	
+	@Override
+	public Account withdrawamount(int acc_id,double acc_no, int amount) {
+		  Account withdrawamount = ((AccountServiceimpl) accountRepository).withdrawamount(acc_id,acc_no,amount);
+		return  withdrawamount;
+	}
+
+	
+	
+
+	@Override
+	public void depositeamount(Account account) {
+		accountRepository.save(account);
+		
+	}
+/*	 @Override
+	    public Account createRandomAccount() {
+	        String randomAccountNumber = accountNumberGeneratorService.generateRandomAccountNumber();
+
+	        Account newAccount = new Account();
+	        newAccount.setAcc_number(randomAccountNumber);
+
+	        // You might want to set other default values for the new account
+	        newAccount.setBalance(0.0);
+
+	        return accountRepository.save(newAccount);
+	    }
+
+	*/
+
+	@Override
+	public boolean creditAmount(Long acc_id, double amount) {
+		 Optional<Account> optionalAccount = accountRepository.findById(acc_id);
+	        if (optionalAccount.isPresent()) {
+	            Account account = optionalAccount.get();
+	            double currentBalance = account.getBalance();
+	            account.setBalance(currentBalance + amount);
+	            accountRepository.save(account);
+	            return true;
+	        } else {
+	            return false; // Account not found
+	        }
+	}
+
+	
+	@Override
+	public boolean debitAmount(Long acc_id, double amount) {
+		Optional<Account> optionalAccount = accountRepository.findById(acc_id);
+        if (optionalAccount.isPresent()) {
+            Account account = optionalAccount.get();
+            double currentBalance = account.getBalance();
+            
+            // Check if there is sufficient balance
+            if (currentBalance >= amount) {
+                account.setBalance(currentBalance - amount);
+                accountRepository.save(account);
+                return true;
+            } else {
+                return false; // Insufficient balance
+            }
+        } else {
+            return false; // Account not found
+        }
+    }
+}

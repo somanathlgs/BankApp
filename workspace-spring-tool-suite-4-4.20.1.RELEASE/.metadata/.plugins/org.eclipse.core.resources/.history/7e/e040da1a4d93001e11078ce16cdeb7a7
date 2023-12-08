@@ -1,0 +1,28 @@
+package com.example.demo.service;
+
+import org.springframework.stereotype.Service;
+
+import com.example.demo.dto.BankResponse;
+import com.example.demo.dto.CustomerRequest;
+import com.example.demo.entity.Customer;
+@Service
+public class CustomerServiceimpl implements CustomerService{
+ 
+	Customer c =new Customer();
+
+	
+	
+	@Override
+	public BankResponse createaccount(CustomerRequest customerRequest) {
+		
+				
+				
+				
+		
+		
+		return null;
+		
+		
+	}
+
+}

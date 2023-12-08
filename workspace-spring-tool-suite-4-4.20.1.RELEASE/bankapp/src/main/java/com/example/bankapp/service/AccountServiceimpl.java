@@ -1,0 +1,62 @@
+package com.example.bankapp.service;
+
+import java.util.List;
+
+import com.example.bankapp.entity.Account;
+import com.example.bankapp.repository.AccountRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+	import org.springframework.stereotype.Service;
+
+	import java.util.List;
+	import java.util.Optional;
+
+	@Service
+	public class AccountServiceimpl implements AccountService {
+
+
+	    @Autowired
+	    private AccountRepository accountRepository;
+
+	    @Override
+	    public List<Account> getAllAccounts() {
+	        return accountRepository.findAll();
+	    }
+
+	    @Override
+	    public Account getAccountById(Long accountId) {
+	        Optional<Account> optionalAccount = accountRepository.findById(accountId);
+	        return optionalAccount.orElse(null);
+	    }
+
+	    @Override
+	    public Account createAccount(Account account) {
+	        // You might want to add validation logic here before saving to the database
+	        return accountRepository.save(account);
+	    }
+
+	    @Override
+	    public Account updateAccount(Long accountId, Account updatedAccount) {
+	        Optional<Account> optionalAccount = accountRepository.findById(accountId);
+	        if (optionalAccount.isPresent()) {
+	            Account existingAccount = optionalAccount.get();
+	            // Update the fields you want to allow updating
+	            existingAccount.setAccountNumber(updatedAccount.getAccountNumber());
+	            existingAccount.setBalance(updatedAccount.getBalance());
+	            // Add more fields as needed
+	            return accountRepository.save(existingAccount);
+	        } else {
+	            return null; // Account not found
+	        }
+	    }
+
+	    @Override
+	    public boolean deleteAccount(Long accountId) {
+	        if (accountRepository.existsById(accountId)) {
+	            accountRepository.deleteById(accountId);
+	            return true;
+	        } else {
+	            return false; // Account not found
+	        }
+	    }
+	}

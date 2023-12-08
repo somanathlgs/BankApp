@@ -1,0 +1,47 @@
+package com.example.bankapp.service;
+
+import java.math.BigDecimal;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.example.bankapp.entity.Account;
+import com.example.bankapp.repository.AccountRepository;
+
+public class AccountServiceimpl implements AccountService {
+
+	 @Autowired
+	    private AccountRepository accountRepository;
+
+	    @Autowired
+	    private TransactionRepository transactionRepository;
+
+	    @Override
+	    public Account createAccount(String accountHolderName, BigDecimal initialBalance) {
+	        // Implementation to create a new account
+	    }
+
+	    @Override
+	    public Account getAccount(String accountNumber) {
+	        // Implementation to get account details
+	    }
+
+	    @Override
+	    public void deposit(String accountNumber, BigDecimal amount) {
+	        // Implementation to deposit money
+	    }
+
+	    @Override
+	    public void withdraw(String accountNumber, BigDecimal amount) {
+	        // Implementation to withdraw money
+	    }
+
+	    @Override
+	    public void transfer(String fromAccountNumber, String toAccountNumber, BigDecimal amount) {
+	        // Implementation to transfer money
+	    }
+
+	    @Override
+	    public List<Transaction> getTransactions(String accountNumber) {
+	        // Implementation to get account transactions
+	    }
+}

@@ -1,0 +1,9 @@
+package service;
+
+import java.util.Optional;
+
+import entity.Account;
+
+public interface AccountService {
+ 
+}

@@ -1,0 +1,48 @@
+package com.example.bankapp.service;
+
+	
+	import org.springframework.beans.factory.annotation.Autowired;
+	import org.springframework.stereotype.Service;
+
+	import com.example.bankapp.entity.Account;
+	import com.example.bankapp.repository.AccountRepository;
+
+	import java.util.List;
+	import java.util.Optional;
+
+	@Service
+	public class AccountServiceimpl implements AccountService {
+
+		@Override
+		public List<Account> getAllAccounts() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public Account getAccountById(Long accountId) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public Account createAccount(Account account) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public Account updateAccount(Long accountId, Account updatedAccount) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public boolean deleteAccount(Long accountId) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+	   
+	}
+

@@ -1,0 +1,17 @@
+package com.example.demo.service;
+
+import com.example.demo.entity.Account;
+
+public interface AccountService {
+
+	Account createaccount(Account account);
+
+	Account withdrawamount(int acc_id,int acc_no, int amount);
+
+	
+
+	void depositeamount(Account account);
+
+	
+
+}

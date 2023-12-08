@@ -1,0 +1,13 @@
+package com.example.bankapp.service;
+
+
+
+
+public class TransactionalServiceimpl  implements TransactionalService{
+
+	
+	 
+
+	
+
+}

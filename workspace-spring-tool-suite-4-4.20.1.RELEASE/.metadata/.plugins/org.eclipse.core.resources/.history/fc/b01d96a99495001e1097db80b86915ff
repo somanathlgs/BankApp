@@ -1,0 +1,23 @@
+package com.example.demo.service;
+
+import java.util.List;
+
+import com.example.demo.entity.Account;
+
+public interface AccountService {
+
+	Account createaccount(Account account);
+
+	List<Account> getallaccount();
+
+	Account getaccount(String acc_id);
+
+	 Account updateaccount(int acc_id);
+	 
+    Account withdrawamount(int acc_id,double acc_no, int amount);
+
+	void depositeamount(Account account);
+
+	//Account createRandomAccount();
+
+}

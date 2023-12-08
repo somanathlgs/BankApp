@@ -1,0 +1,65 @@
+package com.example.demo.service;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entity.Account;
+import com.example.demo.repository.AccountRepository;
+
+@Service
+public class AccountServiceimpl implements AccountService{
+
+	@Autowired
+	private AccountRepository accountRepository;
+	
+	@Override
+	public Account createaccount(Account account) {
+		
+		
+		Account save = accountRepository.save(account);
+		return save;
+	}
+
+	@Override
+	public List<Account> getallaccount() {
+		List<Account> list = accountRepository.findAll();
+		return list;
+	}
+	
+	@Override
+	public Account getaccount(String acc_id) {
+	      Account a = accountRepository.findById((int) Long.parseLong(acc_id)).orElse(null);
+		return a;
+		
+	}
+	
+	@Override
+	public Account updateaccount(int acc_id) {
+		
+		Account save = accountRepository.save(null);
+		return save;
+		
+	}
+
+	
+
+	
+	
+	@Override
+	public Account withdrawamount(int acc_id,double acc_no, int amount) {
+		  Account withdrawamount = ((AccountServiceimpl) accountRepository).withdrawamount(acc_id,acc_no,amount);
+		return  withdrawamount;
+	}
+
+	
+	
+
+	@Override
+	public void depositeamount(Account account) {
+		accountRepository.save(account);
+		
+	}
+
+	
+}

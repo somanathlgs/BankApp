@@ -1,0 +1,13 @@
+package com.example.bankapp.service;
+
+import java.math.BigDecimal;
+
+public interface TransactionalService {
+
+	public interface TransactionalService {
+	    void performTransaction(String fromAccountNumber, String toAccountNumber, BigDecimal amount);
+	}
+
+
+
+}

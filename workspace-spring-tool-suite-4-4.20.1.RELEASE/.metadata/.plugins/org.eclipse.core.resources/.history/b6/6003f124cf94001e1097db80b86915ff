@@ -1,0 +1,73 @@
+package com.example.demo.service;
+
+import java.math.BigInteger;
+import java.util.List;
+import java.util.Random;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entity.Account;
+import com.example.demo.repository.AccountRepository;
+
+@Service
+public class AccountServiceimpl implements AccountService{
+
+	@Autowired
+	private AccountRepository accountRepository;
+	
+	Account a=new Account();
+	@Override
+	public Account createaccount(Account account) {
+		Random rd=new Random();
+		int rdnum=rd.nextInt(10000);
+		String rdnum1=String.valueOf(rdnum);
+		BigInteger acc_number=new BigInteger(1122+rdnum1);
+		a.setAcc_number(acc_number);
+		
+		Account save = accountRepository.save(account);
+		return save;
+	}
+
+	@Override
+	public List<Account> getallaccount() {
+		List<Account> list = accountRepository.findAll();
+		return list;
+	}
+	
+	@Override
+	public Account getaccount(String acc_id) {
+	      Account a = accountRepository.findById((int) Long.parseLong(acc_id)).orElse(null);
+		return a;
+		
+	}
+	
+	@Override
+	public Account updateaccount(int acc_id) {
+		
+		Account save = accountRepository.save(null);
+		return save;
+		
+	}
+
+	
+
+	
+	
+	@Override
+	public Account withdrawamount(int acc_id,double acc_no, int amount) {
+		  Account withdrawamount = ((AccountServiceimpl) accountRepository).withdrawamount(acc_id,acc_no,amount);
+		return  withdrawamount;
+	}
+
+	
+	
+
+	@Override
+	public void depositeamount(Account account) {
+		accountRepository.save(account);
+		
+	}
+
+	
+}

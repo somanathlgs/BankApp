@@ -1,0 +1,44 @@
+package service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import entity.Account;
+import repo.Repository;
+
+public class AccountServiceimpl implements AccountService{
+
+	@Autowired
+	private static Repository repo;
+	
+	 public static Account createAccount(Account account) {
+	        return repo.save(account);
+	    }
+
+	    public Optional<Account> getAccount(Integer id) {
+	        return repo.findById(id);
+	    }
+
+	    public Account deposit(Integer acc_id, double amount) {
+	        Account account = getAccount(acc_id).orElseThrow(() -> new RuntimeException("Account not found"));
+	        account.setBalance(((Object) account).getBalance() + amount);
+	        return repo.save(account);
+	    }
+
+	    public Account withdraw(Integer acc_id, double amount) {
+	        Account account = getAccount(acc_id).orElseThrow(() -> new RuntimeException("Account not found"));
+	        if (((Object) account).getBalance() < amount) {
+	            throw new RuntimeException("Insufficient funds");
+	        }
+	        account.setBalance(((Object) account).getBalance() - amount);
+	        return repo.save(account);
+	    }
+
+		@Override
+		public Account createaccount() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+	}
+}

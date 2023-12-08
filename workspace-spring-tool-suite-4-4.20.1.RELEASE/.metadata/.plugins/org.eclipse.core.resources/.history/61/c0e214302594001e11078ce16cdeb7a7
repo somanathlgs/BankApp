@@ -1,0 +1,35 @@
+package com.example.demo.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.example.demo.entity.Account;
+import com.example.demo.service.AccountService;
+
+public class AccountController {
+
+	@Autowired
+	private AccountService accountService;
+	
+	@PostMapping("/createaccount")
+	public Account creteaccount(@PathVariable Account account) {
+		
+		Account account1 = accountService.createaccount(account);
+		return account1;
+		
+	}
+	@GetMapping("/getamount")
+	public Account withdraw(int acc_id,int acc_no,int amount) {
+		Account withdrawamount = accountService.withdrawamount(acc_id,acc_no,amount);
+		return withdrawamount;
+		
+	}
+	@PostMapping("/depositeamount")
+	public Account deposite(@PathVariable Account account) {
+		accountService.depositeamount(account);
+		return account;
+		
+	}
+}

@@ -1,0 +1,39 @@
+package com.example.bankapp.service;
+
+
+import java.math.BigDecimal;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+public class TransactionalServiceimpl  implements TransactionalService{
+
+	
+	 
+
+	    @Autowired
+	    private AccountService accountService;
+
+	    @Override
+	    @Transactional
+	    public void performTransaction(String fromAccountNumber, String toAccountNumber, BigDecimal amount) {
+	        try {
+	            // Withdraw money from the source account
+	            accountService.withdraw(fromAccountNumber, amount);
+
+	            // Simulate a delay or some processing
+	            Thread.sleep(5000);
+
+	            // Deposit money into the destination account
+	            accountService.deposit(toAccountNumber, amount);
+	        } catch (Exception e) {
+	            // Handle exceptions and log errors
+	            e.printStackTrace();
+	            // Optionally, you might throw a custom exception to indicate failure
+	            throw new RuntimeException("Transaction failed");
+	        }
+	    }
+	
+
+}

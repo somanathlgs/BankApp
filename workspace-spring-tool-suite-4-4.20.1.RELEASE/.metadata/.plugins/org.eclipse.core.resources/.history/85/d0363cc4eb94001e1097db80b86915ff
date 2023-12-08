@@ -1,0 +1,15 @@
+package com.example.bankapp.entity;
+
+import java.math.BigDecimal;
+
+public class Account {
+	// Account.java
+	    private Long id;
+	    private String accountNumber;
+	    private String accountHolderName;
+	    private BigDecimal balance;
+	    // other fields, getters, setters
+	}
+
+
+

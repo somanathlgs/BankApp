@@ -1,0 +1,61 @@
+package com.example.demo.entity;
+
+import java.math.BigInteger;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+public class Account {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int acc_id;
+	private String acc_number;
+	private double balance;
+	private String acc_status;
+	
+	public Account() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Account(int acc_id, String acc_number, double balance, String acc_status) {
+		super();
+		this.acc_id = acc_id;
+		this.acc_number = acc_number;
+		this.balance = balance;
+		this.acc_status = acc_status;
+	}
+	@Override
+	public String toString() {
+		return "Account [acc_id=" + acc_id + ", acc_number=" + acc_number + ", balance=" + balance + ", acc_status="
+				+ acc_status + "]";
+	}
+	public int getAcc_id() {
+		return acc_id;
+	}
+	public void setAcc_id(int acc_id) {
+		this.acc_id = acc_id;
+	}
+	public BigInteger getAcc_number() {
+		return acc_number;
+	}
+	public void setAcc_number(String randomAccountNumber) {
+		this.acc_number = randomAccountNumber;
+	}
+	public double getBalance() {
+		return balance;
+	}
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+	public String getAcc_status() {
+		return acc_status;
+	}
+	public void setAcc_status(String acc_status) {
+		this.acc_status = acc_status;
+	}
+	
+}

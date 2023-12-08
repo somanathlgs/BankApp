@@ -1,0 +1,68 @@
+package com.example.bankapp.Controller;
+
+	
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.example.bankapp.entity.Account;
+import com.example.bankapp.service.AccountService;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/accounts")
+public class AccountController {
+
+    @Autowired
+    private AccountService accountService;
+
+    @PostMapping("/create")
+    public ResponseEntity<Account> createAccount(@RequestBody AccountCreationRequest request) {
+        Account newAccount = accountService.createAccount(request);
+        return ResponseEntity.ok(newAccount);
+    }
+
+    @GetMapping("/{accountNumber}")
+    public ResponseEntity<Account> getAccountDetails(@PathVariable String accountNumber) {
+        Account account = accountService.getAccountDetails(accountNumber);
+        return ResponseEntity.ok(account);
+    }
+
+    @PostMapping("/deposit/{accountNumber}")
+    public ResponseEntity<Account> deposit(@PathVariable String accountNumber, @RequestBody TransactionRequest request) {
+        accountService.deposit(accountNumber, request.getAmount());
+        Account updatedAccount = accountService.getAccountDetails(accountNumber);
+        return ResponseEntity.ok(updatedAccount);
+    }
+
+    @PostMapping("/withdraw/{accountNumber}")
+    public ResponseEntity<Account> withdraw(@PathVariable String accountNumber, @RequestBody TransactionRequest request) {
+        accountService.withdraw(accountNumber, request.getAmount());
+        Account updatedAccount = accountService.getAccountDetails(accountNumber);
+        return ResponseEntity.ok(updatedAccount);
+    }
+
+    @PostMapping("/transfer")
+    public ResponseEntity<String> transfer(@RequestBody TransferRequest request) {
+        accountService.transfer(request.getFromAccountNumber(), request.getToAccountNumber(), request.getAmount());
+        return ResponseEntity.ok("Transfer successful");
+    }
+
+    @GetMapping("/transactions/{accountNumber}")
+    public ResponseEntity<List<Transaction>> getAccountTransactions(@PathVariable String accountNumber) {
+        List<Transaction> transactions = accountService.listTransactions(accountNumber);
+        return ResponseEntity.ok(transactions);
+    }
+
+    @DeleteMapping("/close/{accountNumber}")
+    public ResponseEntity<String> closeAccount(@PathVariable String accountNumber) {
+        accountService.closeAccount(accountNumber);
+        return ResponseEntity.ok("Account closed successfully");
+    }
+}
+
+
+
+

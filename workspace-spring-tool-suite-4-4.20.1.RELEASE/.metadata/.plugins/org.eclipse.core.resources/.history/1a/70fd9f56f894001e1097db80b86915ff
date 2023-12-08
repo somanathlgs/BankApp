@@ -1,0 +1,16 @@
+package com.example.bankapp.entity;
+
+import java.math.BigDecimal;
+
+public class Transation {
+
+	// Transaction.java
+	public class Transaction {
+	    private Long id;
+	    private String type; // deposit, withdrawal, transfer
+	    private BigDecimal amount;
+	    private String description;
+	    // other fields, getters, setters
+	}
+
+}

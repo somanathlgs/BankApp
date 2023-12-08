@@ -1,0 +1,23 @@
+package com.example.bankapp.entity;
+
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
+// Transaction.java
+	@Entity
+	public class Transaction {
+	    @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    private Long id;
+	    private Double amount;
+	    private LocalDateTime timestamp;
+	    @ManyToOne
+	    private Account account;
+	    // other fields, getters, setters
+	
+}

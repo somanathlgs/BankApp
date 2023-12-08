@@ -1,0 +1,18 @@
+package com.example.bankapp.service;
+
+import java.util.List;
+
+import com.example.bankapp.entity.Customer;
+
+public interface CustomerService {
+
+	
+	
+	    Customer createCustomer(String firstName, String lastName, String email, String phoneNumber, Address address);
+	    Customer getCustomerById(Long customerId);
+	    List<Customer> getAllCustomers();
+	    void updateCustomer(Long customerId, String firstName, String lastName, String email, String phoneNumber, Address address);
+	    void deleteCustomer(Long customerId);
+	
+
+}

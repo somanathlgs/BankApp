@@ -1,0 +1,8 @@
+package com.example.demo.dto;
+
+public class BankResponse {
+
+	private String response_code;
+	private String response_message;
+	private Accountinfo accountinfo;
+}

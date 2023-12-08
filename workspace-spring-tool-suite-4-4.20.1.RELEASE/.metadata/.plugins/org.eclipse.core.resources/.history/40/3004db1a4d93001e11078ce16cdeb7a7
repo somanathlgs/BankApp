@@ -1,0 +1,36 @@
+package com.example.demo.dto;
+
+import java.time.LocalDateTime;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+
+public class CustomerRequest {
+
+		private String firstname;
+		private String lastname;
+		private String gender;
+		private String address;
+		private String stateoforigin;
+		
+		private String mobilenumber;
+		@CreationTimestamp
+		private LocalDateTime created;
+		@UpdateTimestamp
+		private LocalDateTime modified;
+		private String DOB;
+		
+
+}

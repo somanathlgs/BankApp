@@ -1,0 +1,54 @@
+package com.example.demo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.entity.Customer;
+import com.example.demo.service.CustomerService;
+
+@RestController
+public class CustomerController {
+
+	@Autowired
+	private CustomerService customerService;
+	
+	@PostMapping("/create")
+	public void createcustomer(@RequestBody Customer customer){
+		
+		customerService.createcustomer(customer);
+		
+	}
+	@GetMapping("/getall")
+	public List<Customer> getcustomer() {
+		List<Customer> list = customerService.getcustomer();
+		
+		return list;
+		
+	}
+	@GetMapping("get/{id}")
+	public Customer getcustomerbyid(@PathVariable Long cust_id) {
+		 Customer c = customerService.getcustomerbyid(cust_id);
+		
+		return c;
+	}
+	@PutMapping("/put")
+	public void updatecustomer(@RequestBody Customer customer){
+		
+		customerService.updatecustomer(customer);
+		
+	}
+	public void  deletecustomer() {
+		
+		customerService.deletecustomer();
+		
+		
+	}
+	
+}

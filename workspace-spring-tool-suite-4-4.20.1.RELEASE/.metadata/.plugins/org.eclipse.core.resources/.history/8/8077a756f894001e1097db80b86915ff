@@ -1,0 +1,54 @@
+package com.example.bankapp.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.bankapp.entity.Customer;
+import com.example.bankapp.repository.CustomerRepository;
+
+import java.util.List;
+public class CustomerServiceimpl implements CustomerService{
+
+	
+
+	
+	    @Autowired
+	    private CustomerRepository customerRepository;
+
+	    @Override
+	    public Customer createCustomer(String firstName, String lastName, String email, String phoneNumber, Address address) {
+	        Customer customer = new Customer(firstName, lastName, email, phoneNumber, address);
+	        return customerRepository.save(customer);
+	    }
+
+	    @Override
+	    public Customer getCustomerById(Long customerId) {
+	        return customerRepository.findById(customerId)
+	                .orElseThrow(() -> new NotFoundException("Customer not found with id: " + customerId));
+	    }
+
+	    @Override
+	    public List<Customer> getAllCustomers() {
+	        return customerRepository.findAll();
+	    }
+
+	    @Override
+	    public void updateCustomer(Long customerId, String firstName, String lastName, String email, String phoneNumber, Address address) {
+	        Customer existingCustomer = getCustomerById(customerId);
+	        existingCustomer.setFirstName(firstName);
+	        existingCustomer.setLastName(lastName);
+	        existingCustomer.setEmail(email);
+	        existingCustomer.setPhoneNumber(phoneNumber);
+	        existingCustomer.setAddress(address);
+
+	        customerRepository.save(existingCustomer);
+	    }
+
+	    @Override
+	    public void deleteCustomer(Long customerId) {
+	        Customer existingCustomer = getCustomerById(customerId);
+	        customerRepository.delete(existingCustomer);
+	    }
+	}
+
+}

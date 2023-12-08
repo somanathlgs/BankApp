@@ -1,0 +1,87 @@
+package com.example.demo.controller;
+
+import java.util.List;
+import java.util.Random;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.entity.Account;
+import com.example.demo.service.AccountService;
+
+@RestController
+public class AccountController {
+
+	@Autowired
+	private AccountService accountService;
+	
+	@PostMapping("/createaccount")
+	public Account creteaccount(@RequestBody Account account) {
+		
+		Account account1 = accountService.createaccount(account);
+		return account1;
+		
+		
+	/*	@RestController
+		@RequestMapping("/api/accounts")
+		public class AccountController {
+		    @Autowired
+		    private AccountService accountService;
+
+		    @PostMapping("/create")
+		    public ResponseEntity<Account> createAccount(
+		            @RequestParam String accountNumber,
+		            @RequestParam String ownerName,
+		            @RequestParam double initialBalance) {
+		        Account newAccount = accountService.createAccount(accountNumber, ownerName, initialBalance);
+		        return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
+		    }
+		}
+
+	}*/
+		
+	}
+	
+	@GetMapping("/getallaccount")
+	public List<Account>getallAccount(){
+		
+		List<Account> getallaccount = accountService.getallaccount();
+		return getallaccount;
+		
+	}
+	
+	@GetMapping("/gets/{acc_id}")
+	public Account getaccountbyid(@PathVariable String acc_id) {
+		Account getaccount = accountService.getaccount(acc_id);
+		return getaccount;
+		
+	}
+	
+	@PutMapping("/update/{acc_id}")
+	public Account updateaccount(@RequestBody int acc_id) {
+		Account updateaccount = accountService.updateaccount(acc_id);
+		return updateaccount;
+		
+	}
+	
+	
+	@GetMapping("/getamount/{acc_id}")
+	public Account withdraw( @PathVariable int acc_id,double acc_no,int amount) {
+		Account withdrawamount = accountService.withdrawamount(acc_id,acc_no,amount);
+		return withdrawamount;
+		
+	}
+	@PostMapping("/depositeamount")
+	public Account deposite(@PathVariable Account account) {
+		accountService.depositeamount(account);
+		return account;
+		
+	}
+	
+	
+}
